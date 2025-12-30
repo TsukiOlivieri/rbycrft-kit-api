@@ -5,8 +5,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.post("/create", (req, res) => {
-  const kit = req.body.kit;
-  const buyer = req.body.buyer;
+  const { kit, buyer } = req.body;
 
   if (!kit || !buyer) {
     return res.status(400).json({
@@ -19,7 +18,7 @@ app.post("/create", (req, res) => {
 
   res.json({
     success: true,
-    code: code
+    code
   });
 });
 
@@ -27,10 +26,8 @@ app.get("/", (req, res) => {
   res.send("API online");
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("API rodando na porta " + PORT);
-});
+// ⬇️ APENAS ISSO ⬇️
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`API rodando na porta ${PORT}`);
+  console.log("API rodando na porta " + PORT);
 });
